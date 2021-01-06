@@ -36,7 +36,7 @@ public class boardHandler {
 				rowSum+=boardState[i][j];
 				columnSum+=boardState[j][i];
 			}
-			if(columnSum==-3||rowSum==3)
+			if(columnSum==-3||rowSum==3||columnSum==3||rowSum==-3)
 				result = true;
 			diagonalSum+=boardState[i][i];
 		}
@@ -46,6 +46,10 @@ public class boardHandler {
 		if(diagonalSum==3||diagonalSum==-3)
 			result = true;
 		return result;
+	}
+	
+	public boolean getPlayerTurn() {
+		return playerTurn;
 	}
 	
 	public boolean checkFull() {
