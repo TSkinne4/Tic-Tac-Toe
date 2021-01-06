@@ -11,10 +11,14 @@ public class boardHandler {
 	
 	public boolean updateBoard(int row, int column) {
 		if(boardState[row][column]==0) {
-			if(playerTurn)
+			if(playerTurn) {
 				boardState[row][column] = 1;
-			else
+				playerTurn = false;
+			}
+			else {
 				boardState[row][column] = -1;
+				playerTurn = true;
+			}	
 			return true;
 		}
 		else
@@ -42,5 +46,18 @@ public class boardHandler {
 		if(diagonalSum==3||diagonalSum==-3)
 			result = true;
 		return result;
+	}
+	
+	public boolean checkFull() {
+		boolean result = true;
+		for(int i=0;i<3;i++)
+			for(int j = 0;j<3;j++)
+				if(boardState[i][j]==0)
+					result = false;
+		return result;
+	}
+	
+	public int[][] getBoardState(){
+		return boardState;
 	}
 }
