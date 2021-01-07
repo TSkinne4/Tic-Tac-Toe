@@ -96,7 +96,7 @@ public class mainStage extends Application{
 					while(!run) {
 						if(handler.checkFull())
 							break;
-						int[] computerMove = computer.makeMove(handler.getBoardState());
+						int[] computerMove = computer.makeMove(handler.getBoardState(),false);
 						if(handler.updateBoard(computerMove[0], computerMove[1])) {
 							getSquare(computerMove[0],computerMove[1]).setFill(javafx.scene.paint.Color.BLUE);
 							break;
