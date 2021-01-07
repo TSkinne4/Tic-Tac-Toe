@@ -9,14 +9,14 @@ public class AITester {
 			boardHandler handler = new boardHandler(true);
 			while(true) {
 				while(true) {
-					move = computer.makeMove(handler.getBoardState(),true);
+					move = computer.makeAlternateMove(handler.getBoardState(),true);
 					if(handler.updateBoard(move[0], move[1]))
 						break;
 				}
 				if(handler.checkWin()||handler.checkFull())
 					break;
 				while(true) {
-					move = computer.makeAlternateMove(handler.getBoardState(),false);
+					move = computer.makeMove(handler.getBoardState(),false);
 					if(handler.updateBoard(move[0], move[1]))
 						break;
 				}
