@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class AIWatcher extends Application{
 boolean gameDone = false;
 	
-	Text mainText = new Text("Good Luck!"),gameHistoryText = new Text();
+	Text mainText = new Text(""),gameHistoryText = new Text();
 	GridPane mainBoard;
 	boardHandler handler = new boardHandler(true);
 	tictactoePlayer computer = new tictactoePlayer();
@@ -60,10 +60,41 @@ boolean gameDone = false;
 		@Override
 		public void handle(ActionEvent event) {
 			while(!gameDone) {
+				boolean run = handler.checkWin();
+				while(!run) {
+					int[] computerFirst = computer.makeMove(handler.getBoardState(),true);
+					if(handler.updateBoard(computerFirst[0], computerFirst[1])) {
+						getSquare(computerFirst[0],computerFirst[1]).setFill(javafx.scene.paint.Color.RED);
+						break;
+					}
+					if(handler.checkFull())
+						break;
+					int[] computerMove = computer.makeMove(handler.getBoardState(),false);
+					if(handler.updateBoard(computerMove[0], computerMove[1])) {
+						getSquare(computerMove[0],computerMove[1]).setFill(javafx.scene.paint.Color.BLUE);
+						break;
+					}
+				}
+				if(handler.checkWin()) {
+					if(handler.getPlayerTurn()) {
+						mainText.setText("You Lose!");
+						gameHistory[1]++;
+					}
+					else {
+						mainText.setText("You Win!");
+						gameHistory[0]++;
+					}
+					gameDone = true;
+				}
+				else
+					if(handler.checkFull()) {
+						mainText.setText("Draw!");
+						gameHistory[2]++;
+						gameDone = true;
+					}
 				
 			}
-			
-		}
 		
+		}
 	}
 }
